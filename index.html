@@ -35,6 +35,10 @@
             overflow-x: auto;
             white-space: pre-wrap;
         }
+
+        #calculator {
+            margin-top: 20px;
+        }
     </style>
     <title>Code Generator</title>
 </head>
@@ -47,6 +51,16 @@
         <input type="text" id="inputParameters" placeholder="DWORD* a1, int a2, int a3, int a4">
         <button onclick="generateCode()">Generate Code</button>
         <pre id="outputCode"></pre>
+        <div id="calculator">
+            <label for="paramCountSelector">Select @(INT):</label>
+            <select id="paramCountSelector" onchange="updateParamInfo()">
+                <option value="4">16</option>
+                <option value="3">12</option>
+                <option value="2">8</option>
+                <option value="1">4</option>
+            </select>
+            <p id="paramInfo">This @(INT) takes 4 parameters.</p>
+        </div>
     </div>
     <script>
         function generateCode() {
@@ -68,6 +82,14 @@
 
             // Display the generated code
             document.getElementById('outputCode').innerText = generatedCode;
+        }
+
+        function updateParamInfo() {
+            const paramCountSelector = document.getElementById('paramCountSelector');
+            const selectedParamCount = paramCountSelector.value;
+            const paramInfo = document.getElementById('paramInfo');
+
+            paramInfo.textContent = `This @(INT) takes ${selectedParamCount} parameter${selectedParamCount > 1 ? 's' : ''}.`;
         }
     </script>
 </body>

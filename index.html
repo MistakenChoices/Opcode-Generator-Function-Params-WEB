@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+    <title>Code Generator</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Code Generator</h1>
+        <label for="inputFunctionName">Function Name:</label>
+        <input type="text" id="inputFunctionName" placeholder="_EOS_Auth_DeletePersistentAuth">
+        <label for="inputParameters">Enter parameters (comma-separated):</label>
+        <input type="text" id="inputParameters" placeholder="DWORD* a1, int a2, int a3, int a4">
+        <button onclick="generateCode()">Generate Code</button>
+        <pre id="outputCode"></pre>
+    </div>
+    <script>
+        function generateCode() {
+            // Get input values
+            const functionName = document.getElementById('inputFunctionName').value.trim();
+            const parameters = document.getElementById('inputParameters').value.trim();
+
+            // Check if inputs are not empty
+            if (functionName === '' || parameters === '') {
+                alert('Please enter function name and parameters.');
+                return;
+            }
+
+            // Generate code
+            const generatedCode = `__declspec(dllexport) int __stdcall ${functionName}(${parameters}) {
+    // Your implementation
+    return 0;
+}`;
+
+            // Display the generated code
+            document.getElementById('outputCode').innerText = generatedCode;
+        }
+    </script>
+</body>
+</html>
